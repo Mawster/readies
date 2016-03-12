@@ -68,7 +68,7 @@ Produces: application/json - example:
           "firstname": "Mario",
           "lastname": "Luef",
           "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-          "trustScroe": 0.8
+          "trustScore": 0.8
         },
         "longitude": -0.12960399687290192,
         "latitude": 51.52512741088867,
@@ -88,7 +88,7 @@ Produces: application/json - example:
           "firstname": "Mario",
           "lastname": "Luef",
           "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-          "trustScroe": 0.8
+          "trustScore": 0.8
         },
         "longitude": -0.12960399687290192,
         "latitude": 51.52512741088867,
@@ -108,7 +108,7 @@ Produces: application/json - example:
           "firstname": "Mario",
           "lastname": "Luef",
           "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-          "trustScroe": 0.8
+          "trustScore": 0.8
         },
         "longitude": -0.12960399687290192,
         "latitude": 51.52512741088867,
@@ -130,7 +130,7 @@ Produces: application/json - example:
           "firstname": "Mario",
           "lastname": "Luef",
           "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-          "trustScroe": 0.8
+          "trustScore": 0.8
         },
         "longitude": -0.12960399687290192,
         "latitude": 51.52512741088867,
@@ -143,7 +143,7 @@ Produces: application/json - example:
           "firstname": "Mario",
           "lastname": "Luef",
           "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-          "trustScroe": 0.8
+          "trustScore": 0.8
         },
         "longitude": -0.12960399687290192,
         "latitude": 51.52512741088867,
@@ -168,7 +168,7 @@ Produces: application/json - example:
       "firstname": "Mario",
       "lastname": "Luef",
       "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-      "trustScroe": 0.8
+      "trustScore": 0.8
     },
     "longitude": -0.12960399687290192,
     "latitude": 51.52512741088867,
@@ -180,7 +180,7 @@ Produces: application/json - example:
       "firstname": "Mario",
       "lastname": "Luef",
       "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-      "trustScroe": 0.8
+      "trustScore": 0.8
     },
     "longitude": -0.12960399687290192,
     "latitude": 51.52512741088867,
@@ -192,7 +192,7 @@ Produces: application/json - example:
       "firstname": "Mario",
       "lastname": "Luef",
       "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-      "trustScroe": 0.8
+      "trustScore": 0.8
     },
     "longitude": -0.12960399687290192,
     "latitude": 51.52512741088867,
@@ -204,7 +204,7 @@ Produces: application/json - example:
       "firstname": "Mario",
       "lastname": "Luef",
       "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-      "trustScroe": 0.8
+      "trustScore": 0.8
     },
     "longitude": -0.12960399687290192,
     "latitude": 51.52512741088867,
