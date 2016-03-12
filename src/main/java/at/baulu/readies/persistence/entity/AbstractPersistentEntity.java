@@ -1,5 +1,6 @@
 package at.baulu.readies.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 
@@ -30,6 +31,7 @@ public abstract class AbstractPersistentEntity implements Persistable<String> {
     }
 
     @Override
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }

@@ -1,6 +1,7 @@
 package at.baulu.readies;
 
 import at.baulu.readies.persistence.entity.User;
+import at.baulu.readies.persistence.repository.UserRepository;
 import at.baulu.readies.realex.ReadiesRealexClient;
 import at.baulu.readies.rest.location.LocationRequest;
 import at.baulu.readies.rest.location.TransactionOffer;
@@ -27,14 +28,16 @@ public class ReadiesPlatform {
     private List<Transaction> activeTransactions;
     private List<Transaction> finishedTransactions;
     private ReadiesRealexClient readiesRealexClient;
+    private UserRepository userRepository;
 
     @Autowired
-    public ReadiesPlatform(ReadiesRealexClient readiesRealexClient) {
+    public ReadiesPlatform(ReadiesRealexClient readiesRealexClient, UserRepository userRepository) {
         this.readiesRealexClient = readiesRealexClient;
         this.userPositions = new HashMap<>();
         this.activeTransactions = new ArrayList<>();
         this.finishedTransactions = new ArrayList<>();
         this.ongoingTransactions = new HashMap<>();
+        this.userRepository = userRepository;
     }
 
     public Collection<UserGeoLocation> getUserPositions() {
@@ -42,16 +45,20 @@ public class ReadiesPlatform {
     }
 
     public void updateUserLocationFromRequest(LocationRequest locationRequest) {
-        UserGeoLocation newPosition = new UserGeoLocation(locationRequest.getUserId(), locationRequest.getLongitude(),
-                locationRequest
-                        .getLatitude());
-        this.userPositions.put(locationRequest.getUserId(), newPosition);
+        User foundUser = userRepository.findOne(locationRequest.getUserId());
+        if (foundUser != null) {
+            UserGeoLocation newPosition = new UserGeoLocation(foundUser, locationRequest.getLongitude(),
+                    locationRequest
+                            .getLatitude());
+            this.userPositions.put(locationRequest.getUserId(), newPosition);
+        }
     }
 
     public Transaction createTransactionForUserFromRequest(User debitor, TransactionRequest transactionRequest) {
         Transaction.TransactionBuilder transactionBuilder = new Transaction.TransactionBuilder();
         transactionBuilder.withAmount(transactionRequest.getAmount());
         transactionBuilder.withDebitor(debitor);
+        transactionBuilder.withTrustScoreThreshold(transactionRequest.getTrustScoreThreshold());
         Transaction createdTransaction = transactionBuilder.createTransaction();
         this.activeTransactions.add(createdTransaction);
         return createdTransaction;
@@ -121,8 +128,11 @@ public class ReadiesPlatform {
                     double distanceInKM = HaversineAlgorithm.haversine(actualUserLocation.getLatitude(), actualUserLocation
                                     .getLongitude(),
                             debitorLocation.getLatitude(), debitorLocation.getLongitude());
-                    if (distanceInKM < HUMAN_WALK_SPEED_KM_HOUR) {
-                        transactionOffers.add(TransactionOffer.fromTransaction(transaction));
+                    if (distanceInKM < HUMAN_WALK_SPEED_KM_HOUR && foundUser.getTrustScore() > transaction.getTrustScoreThreshold()) {
+                        TransactionOffer offer = TransactionOffer.fromTransaction(transaction);
+                        UserGeoLocation debitor = this.userPositions.get(transaction.getDebitor().getId());
+                        offer.setDebitor(debitor);
+                        transactionOffers.add(offer);
                     }
                 }
             }
@@ -134,7 +144,12 @@ public class ReadiesPlatform {
             List<Transaction> ongoingTransactionsOfUser = this.ongoingTransactions.get(foundUser);
             if (ongoingTransactionsOfUser != null) {
                 for (Transaction transaction : ongoingTransactionsOfUser) {
-                    ongoingTransactionOffers.add(TransactionOffer.fromTransaction(transaction));
+                    TransactionOffer offer = TransactionOffer.fromTransaction(transaction);
+                    UserGeoLocation debitor = this.userPositions.get(transaction.getDebitor().getId());
+                    UserGeoLocation creditor = this.userPositions.get(transaction.getCreditor().getId());
+                    offer.setCreditor(creditor);
+                    offer.setDebitor(debitor);
+                    ongoingTransactionOffers.add(offer);
                 }
             }
         }
@@ -162,6 +177,22 @@ public class ReadiesPlatform {
                     return true;
                 } else {
                     return false;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean userBelongsToTransaction(User foundUser, String transactionId) {
+        List<Transaction> ongoingTransactionsForUser = this.ongoingTransactions.get(foundUser);
+        if (ongoingTransactionsForUser != null) {
+            synchronized (ongoingTransactionsForUser) {
+                for (Transaction transaction : ongoingTransactionsForUser) {
+                    if (transaction.getTransactionId().equals(transactionId)) {
+                        if (transaction.getDebitor().equals(foundUser) || transaction.getCreditor().equals(foundUser)) {
+                            return true;
+                        }
+                    }
                 }
             }
         }

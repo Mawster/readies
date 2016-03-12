@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Simple Map</title>
+    <title>Readies Cockpit</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
     <style>
@@ -22,16 +22,26 @@
     var map;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: -34.397, lng: 150.644},
-            zoom: 8
+            center: {lat: 51.532137, lng: -0.124268},
+            zoom: 15
         });
 
         var iconBase = 'http://maps.google.com/mapfiles/kml/pal2/';
+
+        var markersArray = [];
+
+        function clearOverlays() {
+            for (var i = 0; i < markersArray.length; i++) {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
 
         (function poll() {
             setTimeout(function () {
                 $.ajax({
                     url: document.URL + "/location", success: function (data) {
+                        clearOverlays();
                         data.forEach(function (locationInfo) {
                             var marker = new google.maps.Marker({
                                 position: new google.maps.LatLng({
@@ -40,6 +50,27 @@
                                 }),
                                 map: map,
                                 icon: iconBase + 'icon50.png'
+                            });
+                            markersArray.push(marker);
+
+                            var contentString = '<div id="content">' +
+                                    '<div id="siteNotice">' +
+                                    '</div>' +
+                                    '<img src="' + locationInfo.user.photoUrl + '" width="60" height="60">' +
+                                    '<h1 id="firstHeading" class="firstHeading">' + locationInfo.user.firstname + ' ' +
+                                    locationInfo.user.lastname +
+                                    '</h1>' +
+                                    '<div id="bodyContent">' +
+                                    '</div>' +
+                                    '</div>';
+
+                            var infowindow = new google.maps.InfoWindow({
+                                content: contentString
+                            });
+
+
+                            google.maps.event.addListener(marker, "click", function () {
+                                infowindow.open(map, marker);
                             });
                         })
 

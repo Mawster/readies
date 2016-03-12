@@ -15,16 +15,18 @@ public class Transaction {
     private final long startTimeMillis;
     private final User debitor;
     private final double amount;
+    private final double trustScoreThreshold;
     private User creditor;
     private List<User> declinedUsers = new ArrayList<>();
     private boolean debitorSubmitted = false;
     private boolean creditorSubmitted = false;
 
-    private Transaction(User debitor, double amount) {
+    private Transaction(User debitor, double amount, double trustScoreThreshold) {
         this.transactionId = UUID.randomUUID().toString();
         this.startTimeMillis = new Date().getTime();
         this.debitor = debitor;
         this.amount = amount;
+        this.trustScoreThreshold = trustScoreThreshold;
     }
 
     public String getTransactionId() {
@@ -55,6 +57,18 @@ public class Transaction {
         return declinedUsers;
     }
 
+    public double getTrustScoreThreshold() {
+        return trustScoreThreshold;
+    }
+
+    public boolean isDebitorSubmitted() {
+        return debitorSubmitted;
+    }
+
+    public boolean isCreditorSubmitted() {
+        return creditorSubmitted;
+    }
+
     public boolean hasUserDeclinedTransaction(User hasDeclined) {
         if (this.declinedUsers == null || !this.declinedUsers.contains(hasDeclined)) {
             return false;
@@ -77,6 +91,7 @@ public class Transaction {
     public static class TransactionBuilder {
         private User debitor;
         private double amount;
+        private double trustScoreThreshold;
 
         public TransactionBuilder withDebitor(User debitor) {
             this.debitor = debitor;
@@ -88,8 +103,13 @@ public class Transaction {
             return this;
         }
 
+        public TransactionBuilder withTrustScoreThreshold(double trustScore) {
+            this.trustScoreThreshold = trustScore;
+            return this;
+        }
+
         public Transaction createTransaction() {
-            return new Transaction(debitor, amount);
+            return new Transaction(debitor, amount, trustScoreThreshold);
         }
     }
 }

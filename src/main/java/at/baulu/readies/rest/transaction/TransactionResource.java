@@ -97,6 +97,13 @@ public class TransactionResource {
             LOG.info("User not found!");
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
+        if (!this.readiesPlatform.userBelongsToTransaction(foundUser, transactionId)) {
+            LOG.info("User is not part of transaction!");
+            return new ResponseEntity<UserResponse>(new UserResponse("You can not submit a transaction where you are " +
+                    "not part of!"),
+                    HttpStatus
+                            .METHOD_NOT_ALLOWED);
+        }
         boolean done = this.readiesPlatform.submitTransactionForUser(transactionId, foundUser);
         if (done) {
             LOG.info("The transaction is completely done!");

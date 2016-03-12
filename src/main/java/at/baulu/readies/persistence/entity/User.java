@@ -1,5 +1,7 @@
 package at.baulu.readies.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -13,13 +15,15 @@ public class User extends AbstractPersistentEntity {
     @Column(nullable = false)
     private String lastname;
     @Column(nullable = false, unique = true)
+    @JsonIgnore
     private String email;
     @Column(nullable = false)
+    @JsonIgnore
     private String subAccount;
     @Column(nullable = false)
     private String photoUrl;
     @Column(nullable = false)
-    private Double trustScroe;
+    private Double trustScore;
 
     public User() {
     }
@@ -30,7 +34,7 @@ public class User extends AbstractPersistentEntity {
         this.email = email;
         this.subAccount = subAccount;
         this.photoUrl = photoUrl;
-        this.trustScroe = trustScroe;
+        this.trustScore = trustScroe;
     }
 
     public String getFirstname() {
@@ -73,11 +77,11 @@ public class User extends AbstractPersistentEntity {
         this.photoUrl = photoUrl;
     }
 
-    public Double getTrustScroe() {
-        return trustScroe;
+    public Double getTrustScore() {
+        return trustScore;
     }
 
-    public void setTrustScroe(Double trustScroe) {
-        this.trustScroe = trustScroe;
+    public void setTrustScore(Double trustScore) {
+        this.trustScore = trustScore;
     }
 }

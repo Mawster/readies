@@ -9,6 +9,7 @@ public class TransactionRequest {
     @NotBlank
     private String userId;
     private double amount;
+    private double trustScoreThreshold;
 
     public String getUserId() {
         return userId;
@@ -24,5 +25,13 @@ public class TransactionRequest {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public double getTrustScoreThreshold() {
+        return trustScoreThreshold;
+    }
+
+    public void setTrustScoreThreshold(double trustScoreThreshold) {
+        this.trustScoreThreshold = trustScoreThreshold;
     }
 }

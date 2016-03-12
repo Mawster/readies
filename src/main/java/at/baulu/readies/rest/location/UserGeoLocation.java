@@ -1,18 +1,20 @@
 package at.baulu.readies.rest.location;
 
+import at.baulu.readies.persistence.entity.User;
+
 import java.util.Date;
 
 /**
  * Created by Mario on 12.03.2016.
  */
 public class UserGeoLocation {
-    private String userId;
+    private User user;
     private float longitude;
     private float latitude;
     private Long timeMillis;
 
-    public UserGeoLocation(String userId, float longitude, float latitude) {
-        this.userId = userId;
+    public UserGeoLocation(User userId, float longitude, float latitude) {
+        this.user = userId;
         this.longitude = longitude;
         this.latitude = latitude;
         this.timeMillis = new Date().getTime();
@@ -42,11 +44,11 @@ public class UserGeoLocation {
         this.timeMillis = timeMillis;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(User userId) {
+        this.user = user;
     }
 }
