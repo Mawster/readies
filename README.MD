@@ -16,15 +16,15 @@ Consumes: application/json - example:
 {
     "firstname":"Mario",
     "lastname":"Luef",
-    "email":"Mario.luef@catalysts.cc",
+    "email":"Mario.luef1@catalysts.cc",
     "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
-    "trustScore": 0.43
+    "trustScore": 0.8
 }
 ```
 Produces: application/json - example:
 ```json
 {
-  "userId": "8a9ad0325369516e0153695a515f0003"
+  "userId": "8a9ad0325369d178015369d1ad290000"
 }
 ```
 
@@ -58,7 +58,101 @@ Consumes: application/json - example:
 Produces: application/json - example:
 ```json
 {
-  "userId": "8a9ad0325369516e015369518a320000"
+  "availableTransactions": [
+    {
+      "transactionId": "3c2709e0-4682-4ec1-b4eb-c353e653d9fc",
+      "startTimeMillis": 0,
+      "debitor": {
+        "user": {
+          "id": "8a9ad0325369d178015369d1ad290000",
+          "firstname": "Mario",
+          "lastname": "Luef",
+          "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+          "trustScroe": 0.8
+        },
+        "longitude": -0.12960399687290192,
+        "latitude": 51.52512741088867,
+        "timeMillis": 1457769344834
+      },
+      "amount": 95.55,
+      "creditor": null,
+      "debitorSubmitted": false,
+      "creditorSubmitted": false
+    },
+    {
+      "transactionId": "bcac8717-dd43-4df1-8878-63c9d597055a",
+      "startTimeMillis": 0,
+      "debitor": {
+        "user": {
+          "id": "8a9ad0325369d178015369d1ad290000",
+          "firstname": "Mario",
+          "lastname": "Luef",
+          "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+          "trustScroe": 0.8
+        },
+        "longitude": -0.12960399687290192,
+        "latitude": 51.52512741088867,
+        "timeMillis": 1457769344834
+      },
+      "amount": 95.55,
+      "creditor": null,
+      "debitorSubmitted": false,
+      "creditorSubmitted": false
+    },
+    {
+      "transactionId": "da86beda-e4c0-4051-b556-da2e1434915e",
+      "startTimeMillis": 0,
+      "debitor": {
+        "user": {
+          "id": "8a9ad0325369d178015369d1ad290000",
+          "firstname": "Mario",
+          "lastname": "Luef",
+          "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+          "trustScroe": 0.8
+        },
+        "longitude": -0.12960399687290192,
+        "latitude": 51.52512741088867,
+        "timeMillis": 1457769344834
+      },
+      "amount": 95.55,
+      "creditor": null,
+      "debitorSubmitted": false,
+      "creditorSubmitted": false
+    }
+  ],
+  "onGoingTransactions": [
+    {
+      "transactionId": "d24f5b8d-0ab3-412d-8d8f-bdf1b0aa1543",
+      "startTimeMillis": 0,
+      "debitor": {
+        "user": {
+          "id": "8a9ad0325369d178015369d1ad290000",
+          "firstname": "Mario",
+          "lastname": "Luef",
+          "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+          "trustScroe": 0.8
+        },
+        "longitude": -0.12960399687290192,
+        "latitude": 51.52512741088867,
+        "timeMillis": 1457769344834
+      },
+      "amount": 95.55,
+      "creditor": {
+        "user": {
+          "id": "8a9ad0325369d178015369d26e910003",
+          "firstname": "Mario",
+          "lastname": "Luef",
+          "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+          "trustScroe": 0.8
+        },
+        "longitude": -0.12960399687290192,
+        "latitude": 51.52512741088867,
+        "timeMillis": 1457769479934
+      },
+      "debitorSubmitted": false,
+      "creditorSubmitted": false
+    }
+  ]
 }
 ```
 
@@ -69,16 +163,52 @@ Produces: application/json - example:
 ```json
 [
   {
-    "userId": "8a9ad0325369516e0153695cb86e0005",
-    "longitude": 51.5311279296875,
-    "latitude": -0.12360399961471558,
-    "timeMillis": 1457761603700
+    "user": {
+      "id": "8a9ad0325369d178015369d1ad290000",
+      "firstname": "Mario",
+      "lastname": "Luef",
+      "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+      "trustScroe": 0.8
+    },
+    "longitude": -0.12960399687290192,
+    "latitude": 51.52512741088867,
+    "timeMillis": 1457769344834
   },
   {
-    "userId": "8a9ad0325369516e0153695a515f0003",
-    "longitude": 51.5311279296875,
-    "latitude": -0.12360399961471558,
-    "timeMillis": 1457761560249
+    "user": {
+      "id": "8a9ad0325369d178015369d255640002",
+      "firstname": "Mario",
+      "lastname": "Luef",
+      "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+      "trustScroe": 0.8
+    },
+    "longitude": -0.12960399687290192,
+    "latitude": 51.52512741088867,
+    "timeMillis": 1457769349609
+  },
+  {
+    "user": {
+      "id": "8a9ad0325369d178015369d23cd10001",
+      "firstname": "Mario",
+      "lastname": "Luef",
+      "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+      "trustScroe": 0.8
+    },
+    "longitude": -0.12960399687290192,
+    "latitude": 51.52512741088867,
+    "timeMillis": 1457769347562
+  },
+  {
+    "user": {
+      "id": "8a9ad0325369d178015369d26e910003",
+      "firstname": "Mario",
+      "lastname": "Luef",
+      "photoUrl": "https://scontent-ams3-1.xx.fbcdn.net/hphotos-xta1/v/t1.0-9/10246592_1031032256955974_3392747299802861027_n.jpg?oh=189227d2c7bb9f9b0304718352728035&oe=57510A77",
+      "trustScroe": 0.8
+    },
+    "longitude": -0.12960399687290192,
+    "latitude": 51.52512741088867,
+    "timeMillis": 1457769351328
   }
 ]
 ```
@@ -89,14 +219,15 @@ Method: POST
 Consumes: application/json - example:
 ```json
 {
-    "userId":"8a9ad0325369516e0153695cb86e0005",
-    "amount": 125.23
+    "userId":"8a9ad0325369d178015369d1ad290000",
+    "amount": 95.55,
+    "trustScoreThreshold": 60
 }
 ```
 Produces: application/json - example:
 ```json
 {
-  "message": "Transaction with id: 55e9a0f1-852d-4ca2-8467-70b54c035c37 created!"
+  "message": "Transaction with id: d24f5b8d-0ab3-412d-8d8f-bdf1b0aa1543 created!"
 }
 ```
 
